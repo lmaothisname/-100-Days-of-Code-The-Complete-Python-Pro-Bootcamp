@@ -31,22 +31,21 @@ logo = r"""
 """
 print(logo)
 def calculator():
-    choice = "y"
-    ask_user = float(input("What's the first number?: "))
-    while choice != "n":
-        for key in keys:
-            print(key)
-        choose_operation = input("Pick an operation: ")
-        next_number = float(input("What's the next number?: "))
-        result = 0
-        for key in keys:
-            if key == choose_operation:
-                result = keys[key](ask_user,next_number)
-        print(f"{ask_user} {choose_operation} {next_number} = {result}")
-        choice = input(f"Type 'y' to continue calculating with {result}, or type 'n' to start a new calculation: ")
-        if choice == "y":
-            ask_user = result
-        else:
-            choice = "n"
-            print("\n" * 20)
+  choice = "y"
+  num1 = float(input("What's the first number?: "))
+  while choice != "n":
+    for key in operations:
+      print(key)
+    choose_operations = input("Pick an operation: ")
+    num2= float(input("What's the next number?: "))
+    result = operations[choose_operations](num1,num2)
+    print(f"{num1} {choose_operations} {num2} = {result}")
+    choice = input(f"Type 'y' to continue calculating with {result}, or type 'n' to start a new calculation: ")
+    if choice == "n":
+      system("clear")
+      calculator()
+    num1 = result
+    
 calculator()
+
+
