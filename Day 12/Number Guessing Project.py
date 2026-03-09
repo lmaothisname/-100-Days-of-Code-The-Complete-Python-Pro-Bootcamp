@@ -9,7 +9,7 @@ logo = r"""
 print(logo)
 print("Welcome to the Number Guessing Game!")
 print("I'm thinking of a number between 1 and 100")
-computer_number = 36
+computer_number = random.randint(1,100)
 choose_game_mode = input("Choose a difficulty.Type 'easy' or 'hard': ")
 attempts = 0
 if choose_game_mode == "easy":
@@ -38,6 +38,7 @@ while status:
         print(guess)
         status = True
     attempts -= 1
+
 
 
 
