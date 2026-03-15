@@ -23,7 +23,8 @@ MENU = {
         "cost": 3.0,
     }
 }
-
+""" @Author: Tran Cao Anh Kiet -->"""
+""" Date created: 2026.03.15  16:04 PM"""
 resources = {
     "water": 300,
     "milk": 200,
