@@ -1,0 +1,125 @@
+{% include "header.html" %}
+
+  <!-- BEGIN: Hero Section -->
+  <section class="hero-section">
+    <!-- Background Image -->
+    <div class="hero-bg-wrapper">
+      <img alt="Cozy Cafe Background" class="hero-bg-img" src="{{ url_for('static', filename='assets/img/doi_vong_canh.jpeg') }}"/>
+      <div class="hero-overlay"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <h1 class="hero-title text-shadow">
+        GÓC QUÁN QUEN,<br/>
+        VỊ MỚI LẠ
+      </h1>
+      <p class="hero-subtitle text-shadow">
+        Không cần đi đâu xa, những hương vị địa phương tuyệt vời nhất đang chờ bạn khám phá ngay góc phố quen.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="/hue">
+          KHÁM PHÁ HUẾ
+        </a>
+        <a class="hero-secondary-link" href="/hue">
+          Xem tất cả địa điểm
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- END: Hero Section -->
+
+  <!-- BEGIN: Features Section -->
+  <section class="features-section">
+    <div class="features-intro">
+      <p>
+        HueLocal là góc nhỏ nơi mình lưu giữ và chia sẻ những quán cà phê hay ho và món ăn địa phương yêu thích. Tất cả đều từ trải nghiệm thực tế và cảm nhận cá nhân của mình, hy vọng sẽ giúp bạn có thêm gợi ý cho những buổi dạo chơi sắp tới.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <!-- Feature 1 -->
+      <div class="feature-item">
+        <div class="feature-icon-box">
+          <span class="material-symbols-outlined">local_cafe</span>
+        </div>
+        <h3 class="feature-title">CHUẨN VỊ BẢN ĐỊA</h3>
+        <p class="feature-desc">
+          Tìm kiếm những địa điểm có đồ ăn ngon, thức uống đa dạng và hương vị đặc trưng khó cưỡng.
+        </p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-item">
+        <div class="feature-icon-box">
+          <span class="material-symbols-outlined">weekend</span>
+        </div>
+        <h3 class="feature-title">KHÔNG GIAN THOẢI MÁI</h3>
+        <p class="feature-desc">
+          Khám phá những góc quán có bầu không khí tuyệt vời nhất, lý tưởng để thư giãn, hẹn hò hay tụ tập bạn bè.
+        </p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-item">
+        <div class="feature-icon-box">
+          <span class="material-symbols-outlined">lightbulb</span>
+        </div>
+        <h3 class="feature-title">GỢI Ý TẬN TÂM</h3>
+        <p class="feature-desc">
+          Luôn cập nhật những địa điểm mới mẻ, góc chụp ảnh đẹp và trải nghiệm thực tế chân thực nhất.
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- END: Features Section -->
+
+  <!-- BEGIN: CTA Section -->
+  <section class="cta-section">
+    <h2 class="cta-heading">BẮT ĐẦU KHÁM PHÁ NGAY!</h2>
+    <a class="btn-primary cta-btn" href="/hue">
+      KHÁM PHÁ HUẾ
+    </a>
+    <a class="cta-link" href="/hue">
+      Xem tất cả địa điểm
+    </a>
+  </section>
+  <!-- END: CTA Section -->
+
+  <!-- BEGIN: Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-links">
+        <a class="footer-link" href="#">
+          <span class="material-symbols-outlined">local_cafe</span>
+          Gợi ý địa điểm
+        </a>
+        <a class="footer-link" href="#">
+          <span class="material-symbols-outlined">person</span>
+          Về HueLocal
+        </a>
+        <a class="footer-link" href="#">
+          <span class="material-symbols-outlined">rocket_launch</span>
+          Có gì mới?
+        </a>
+      </div>
+
+      <div class="footer-socials">
+        <a class="social-btn" href="#" aria-label="Email">
+          <span class="material-symbols-outlined">mail</span>
+        </a>
+        <a class="social-btn" href="#" aria-label="Community">
+          <span class="material-symbols-outlined">forum</span>
+        </a>
+      </div>
+
+      <div class="footer-copyright">
+        <span class="material-symbols-outlined">copyright</span>
+        <span>HueLocal</span>
+      </div>
+    </div>
+  </footer>
+  <!-- END: Footer -->
+
+</body>
+</html>

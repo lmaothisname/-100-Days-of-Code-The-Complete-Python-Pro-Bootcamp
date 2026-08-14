@@ -1,0 +1,434 @@
+{% include "header.html" %}
+
+  <!-- BEGIN: Main Content Area -->
+  <main class="city-main">
+
+    <!-- Left Sidebar: Filters -->
+    <aside class="sidebar-filters">
+      <div class="filters-header">
+        <h2 class="filters-title">
+          <span class="material-symbols-outlined font-bold">tune</span>
+          BỘ LỌC ĐỊA ĐIỂM
+        </h2>
+      </div>
+
+      <div class="filters-content">
+
+        <!-- Category Selector Tab (Links passing ?category=...) -->
+        <div class="category-tabs">
+          <a href="{{ url_for('hue', category='all') }}" class="cat-tab {% if current_category == 'all' or not current_category %}cat-tab-active{% endif %}">
+            <span class="material-symbols-outlined">explore</span>
+            Tất Cả
+          </a>
+          <a href="{{ url_for('hue', category='coffee') }}" class="cat-tab {% if current_category == 'coffee' %}cat-tab-active{% endif %}">
+            <span class="material-symbols-outlined">local_cafe</span>
+            Cà Phê
+          </a>
+          <a href="{{ url_for('hue', category='food') }}" class="cat-tab {% if current_category == 'food' %}cat-tab-active{% endif %}">
+            <span class="material-symbols-outlined">restaurant</span>
+            Quán Ăn
+          </a>
+        </div>
+
+        {% if current_category == 'all' or current_category == 'coffee' or not current_category %}
+        <div class="filter-category-block" id="coffee-filter-section">
+          <div class="category-header-badge coffee-badge">
+            <span class="material-symbols-outlined">local_cafe</span>
+            CÀ PHÊ & KHÔNG GIAN
+          </div>
+
+          <!-- Nhóm 1.1: Không gian & Vibe -->
+          <div class="filter-group">
+            <h3 class="filter-group-title">Không Gian & Vibe</h3>
+            <div class="filter-grid grid-2">
+              <button class="filter-btn filter-btn-active" data-filter="work-study">
+                <span class="material-symbols-outlined">laptop_mac</span>
+                Work & Study
+              </button>
+              <button class="filter-btn" data-filter="chill-chat">
+                <span class="material-symbols-outlined">forum</span>
+                Chill & Hẹn Hò
+              </button>
+              <button class="filter-btn" data-filter="garden">
+                <span class="material-symbols-outlined">yard</span>
+                Sân Vườn
+              </button>
+              <button class="filter-btn" data-filter="vintage">
+                <span class="material-symbols-outlined">history_edu</span>
+                Cổ Điển / Retro
+              </button>
+            </div>
+          </div>
+
+          <!-- Nhóm 1.2: Tiện ích cà phê -->
+          <div class="filter-group">
+            <h3 class="filter-group-title">Tiện Ích & Nhu Cầu</h3>
+            <div class="filter-grid grid-3">
+              <button class="filter-btn btn-sm" data-filter="fast-wifi">
+                <span class="material-symbols-outlined">wifi</span>
+                Wi-Fi Mạnh
+              </button>
+              <button class="filter-btn btn-sm" data-filter="sockets">
+                <span class="material-symbols-outlined">power</span>
+                Nhiều Ổ Cắm
+              </button>
+              <button class="filter-btn btn-sm" data-filter="late-night">
+                <span class="material-symbols-outlined">dark_mode</span>
+                Mở Muộn
+              </button>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if current_category == 'all' or current_category == 'food' or not current_category %}
+        <div class="filter-category-block" id="food-filter-section">
+          <div class="category-header-badge food-badge">
+            <span class="material-symbols-outlined">restaurant_menu</span>
+            QUÁN ĂN & ĐẶC SẢN
+          </div>
+
+          <!-- Nhóm 2.1: Món ngon đặc sản -->
+          <div class="filter-group">
+            <h3 class="filter-group-title">Món Đặc Sản Huế</h3>
+            <div class="filter-grid grid-2">
+              <button class="filter-btn" data-filter="bun-bo">
+                <span class="material-symbols-outlined">ramen_dining</span>
+                Bún Bò Huế
+              </button>
+              <button class="filter-btn" data-filter="banh-hue">
+                <span class="material-symbols-outlined">set_meal</span>
+                Bèo - Nậm - Lọc
+              </button>
+              <button class="filter-btn" data-filter="com-hen">
+                <span class="material-symbols-outlined">rice_bowl</span>
+                Cơm / Bún Hến
+              </button>
+              <button class="filter-btn" data-filter="che-hue">
+                <span class="material-symbols-outlined">icecream</span>
+                Chè Cung Đình
+              </button>
+            </div>
+          </div>
+
+          <!-- Nhóm 2.2: Bữa ăn & Trải nghiệm -->
+          <div class="filter-group">
+            <h3 class="filter-group-title">Bữa Ăn & Trải Nghiệm</h3>
+            <div class="filter-grid grid-3">
+              <button class="filter-btn btn-sm" data-filter="breakfast">
+                <span class="material-symbols-outlined">wb_sunny</span>
+                Ăn Sáng
+              </button>
+              <button class="filter-btn btn-sm" data-filter="lunch-dinner">
+                <span class="material-symbols-outlined">dinner_dining</span>
+                Ăn Trưa / Tối
+              </button>
+              <button class="filter-btn btn-sm" data-filter="street-food">
+                <span class="material-symbols-outlined">storefront</span>
+                Ăn Vặt Vỉa Hè
+              </button>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+    </aside>
+
+    <!-- Middle Column: Results List -->
+    <section class="results-section">
+      <div class="results-container">
+
+        <!-- Destination Header -->
+        <div class="destination-header">
+          <div class="destination-bg-circle"></div>
+          <h1 class="destination-title">HUẾ</h1>
+          <p class="destination-desc">
+            Tổng hợp những quán <strong>cà phê chill & làm việc</strong> tuyệt nhất cùng các <strong>quán ăn đặc sản chuẩn vị cố đô</strong>. Được trải nghiệm và đánh giá cao.
+          </p>
+          <div class="active-badge bauhaus-shadow">
+            <span class="material-symbols-outlined badge-icon">group</span>
+            <span>Gợi ý địa phương cập nhật liên tục. <a class="badge-link" href="#">Gợi ý thêm quán</a></span>
+          </div>
+        </div>
+
+        <!-- List Header -->
+        <div class="list-header">
+          <h2 class="list-title" id="places-count">
+            {% if current_category == 'coffee' %}
+              Quán Cà Phê ({{ all_coffee|length }})
+            {% elif current_category == 'food' %}
+              Quán Ăn Đặc Sản ({{ all_food|length }})
+            {% else %}
+              Khám Phá Địa Điểm ({{ all_coffee|length + all_food|length }})
+            {% endif %}
+          </h2>
+          <div class="view-filter-chips">
+            <span class="list-sort-badge">Đang mở cửa</span>
+            <span class="list-sort-badge bg-yellow">Đánh giá cao</span>
+          </div>
+        </div>
+
+        <!-- Place Cards List (IF / ELIF / ELSE BLOCK) -->
+        <div class="cards-list" id="places-container">
+
+          {% if current_category == 'coffee' %}
+            {% for place in all_coffee %}
+            <article class="place-card bauhaus-shadow" data-category="coffee">
+              <div class="card-media">
+                <img class="card-img" alt="{{ place.name }}" src="{{ place.img_url }}"/>
+                <div class="card-badge bg-coffee">CÀ PHÊ</div>
+              </div>
+              <div class="card-content">
+                <div>
+                  <div class="card-header-row">
+                    <h3 class="place-name">{{ place.name }}</h3>
+                    <div class="rating-badge">
+                      <span class="material-symbols-outlined rating-icon text-red">favorite</span>
+                      {{ place.coffee_rating }}★
+                    </div>
+                  </div>
+                  <div class="place-details">
+                    <p class="detail-item">
+                      <span class="material-symbols-outlined">schedule</span>
+                      <span>{{ place.open_time }} – {{ place.close_time }}</span>
+                    </p>
+                    <p class="detail-item">
+                      <span class="material-symbols-outlined">near_me</span>
+                      <span>{{ place.location }}</span>
+                    </p>
+                    <p class="detail-item text-muted">
+                      <span class="material-symbols-outlined">coffee</span>
+                      <span>Đặc trưng: {{ place.specialty_brew }} ({{ place.coffee_price }})</span>
+                    </p>
+                    {% if place.description %}
+                    <p class="detail-item text-muted">
+                      <span class="material-symbols-outlined">info</span>
+                      <span>{{ place.description }}</span>
+                    </p>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="card-tags">
+                  <span class="tag-badge tag-highlight">{{ place.vibe }}</span>
+                  {% if place.has_wifi %}<span class="tag-badge">Wi-Fi Mạnh</span>{% endif %}
+                  {% if place.has_sockets %}<span class="tag-badge">Ổ Cắm</span>{% endif %}
+                  {% if place.open_late %}<span class="tag-badge">Mở Muộn</span>{% endif %}
+                </div>
+              </div>
+            </article>
+            {% else %}
+            <p class="no-places-msg">Chưa có quán cà phê nào trong hệ thống.</p>
+            {% endfor %}
+
+          {% elif current_category == 'food' %}
+            {% for place in all_food %}
+            <article class="place-card bauhaus-shadow" data-category="food">
+              <div class="card-media">
+                <img class="card-img" alt="{{ place.name }}" src="{{ place.img_url }}"/>
+                <div class="card-badge bg-food">QUÁN ĂN</div>
+              </div>
+              <div class="card-content">
+                <div>
+                  <div class="card-header-row">
+                    <h3 class="place-name">{{ place.name }}</h3>
+                    <div class="rating-badge">
+                      <span class="material-symbols-outlined rating-icon text-red">favorite</span>
+                      {{ place.food_rating }}★
+                    </div>
+                  </div>
+                  <div class="place-details">
+                    <p class="detail-item">
+                      <span class="material-symbols-outlined">schedule</span>
+                      <span>{{ place.open_time }} – {{ place.close_time }}</span>
+                    </p>
+                    <p class="detail-item">
+                      <span class="material-symbols-outlined">near_me</span>
+                      <span>{{ place.location }}</span>
+                    </p>
+                    <p class="detail-item text-muted">
+                      <span class="material-symbols-outlined">restaurant</span>
+                      <span>Món đặc sản: {{ place.signature_dish }} ({{ place.delicacy_price }})</span>
+                    </p>
+                    {% if place.description %}
+                    <p class="detail-item text-muted">
+                      <span class="material-symbols-outlined">info</span>
+                      <span>{{ place.description }}</span>
+                    </p>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="card-tags">
+                  <span class="tag-badge tag-food-highlight">{{ place.signature_dish }}</span>
+                  <span class="tag-badge">{{ place.menu_by_session }}</span>
+                  <span class="tag-badge">Đặc Sản Huế</span>
+                </div>
+              </div>
+            </article>
+            {% else %}
+            <p class="no-places-msg">Chưa có quán ăn nào trong hệ thống.</p>
+            {% endfor %}
+
+          {% else %}
+            
+            {# Hiện tất cả quán cà phê #}
+            {% for place in all_coffee %}
+            <article class="place-card bauhaus-shadow" data-category="coffee">
+              <div class="card-media">
+                <img class="card-img" alt="{{ place.name }}" src="{{ place.img_url }}"/>
+                <div class="card-badge bg-coffee">CÀ PHÊ</div>
+              </div>
+              <div class="card-content">
+                <div>
+                  <div class="card-header-row">
+                    <h3 class="place-name">{{ place.name }}</h3>
+                    <div class="rating-badge">
+                      <span class="material-symbols-outlined rating-icon text-red">favorite</span>
+                      {{ place.coffee_rating }}★
+                    </div>
+                  </div>
+                  <div class="place-details">
+                    <p class="detail-item">
+                      <span class="material-symbols-outlined">schedule</span>
+                      <span>{{ place.open_time }} – {{ place.close_time }}</span>
+                    </p>
+                    <p class="detail-item">
+                      <span class="material-symbols-outlined">near_me</span>
+                      <span>{{ place.location }}</span>
+                    </p>
+                    <p class="detail-item text-muted">
+                      <span class="material-symbols-outlined">coffee</span>
+                      <span>Đặc trưng: {{ place.specialty_brew }} ({{ place.coffee_price }})</span>
+                    </p>
+                    {% if place.description %}
+                    <p class="detail-item text-muted">
+                      <span class="material-symbols-outlined">info</span>
+                      <span>{{ place.description }}</span>
+                    </p>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="card-tags">
+                  <span class="tag-badge tag-highlight">{{ place.vibe }}</span>
+                  {% if place.has_wifi %}<span class="tag-badge">Wi-Fi Mạnh</span>{% endif %}
+                  {% if place.has_sockets %}<span class="tag-badge">Ổ Cắm</span>{% endif %}
+                  {% if place.open_late %}<span class="tag-badge">Mở Muộn</span>{% endif %}
+                </div>
+              </div>
+            </article>
+            {% endfor %}
+
+            {# Hiện tất cả quán ăn #}
+            {% for place in all_food %}
+            <article class="place-card bauhaus-shadow" data-category="food">
+              <div class="card-media">
+                <img class="card-img" alt="{{ place.name }}" src="{{ place.img_url }}"/>
+                <div class="card-badge bg-food">QUÁN ĂN</div>
+              </div>
+              <div class="card-content">
+                <div>
+                  <div class="card-header-row">
+                    <h3 class="place-name">{{ place.name }}</h3>
+                    <div class="rating-badge">
+                      <span class="material-symbols-outlined rating-icon text-red">favorite</span>
+                      {{ place.food_rating }}★
+                    </div>
+                  </div>
+                  <div class="place-details">
+                    <p class="detail-item">
+                      <span class="material-symbols-outlined">schedule</span>
+                      <span>{{ place.open_time }} – {{ place.close_time }}</span>
+                    </p>
+                    <p class="detail-item">
+                      <span class="material-symbols-outlined">near_me</span>
+                      <span>{{ place.location }}</span>
+                    </p>
+                    <p class="detail-item text-muted">
+                      <span class="material-symbols-outlined">restaurant</span>
+                      <span>Món đặc sản: {{ place.signature_dish }} ({{ place.delicacy_price }})</span>
+                    </p>
+                    {% if place.description %}
+                    <p class="detail-item text-muted">
+                      <span class="material-symbols-outlined">info</span>
+                      <span>{{ place.description }}</span>
+                    </p>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="card-tags">
+                  <span class="tag-badge tag-food-highlight">{{ place.signature_dish }}</span>
+                  <span class="tag-badge">{{ place.menu_by_session }}</span>
+                  <span class="tag-badge">Đặc Sản Huế</span>
+                </div>
+              </div>
+            </article>
+            {% endfor %}
+
+          {% endif %}
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Column: Map -->
+    <aside class="map-aside">
+      <!-- Thẻ chứa bản đồ -->
+      <div id="map" style="width: 100%; height: 100%;"></div>
+    </aside>
+
+  </main>
+  <!-- END: Main Content Area -->
+
+  <!-- Leaflet Map Initialization Script -->
+  <script>
+    // 1. Tọa độ trung tâm TP. Huế: [16.4637, 107.5909], mức zoom: 14
+    const map = L.map('map').setView([16.4637, 107.5909], 14);
+
+    // 2. Thêm lớp hiển thị bản đồ (dùng CartoDB Positron hoặc OpenStreetMap)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+
+    // 3. place marker on cafe or foods
+    const places = [
+      {
+        name: "Cà Phê Mắt Biếc",
+        type: "☕ Cà Phê",
+        lat: 16.4883, 
+        lng: 107.5752,
+        desc: "66 Bao Vinh, Hương Vinh, Huế"
+      },
+      {
+        name: "Bún Bò Hẻm Hùng Vương",
+        type: "🍜 Quán Ăn",
+        lat: 16.4635, 
+        lng: 107.5954,
+        desc: "Kiệt 29 Hùng Vương, Huế"
+      },
+      {
+        name: "Cơm Hến Hoa Đông",
+        type: "🍜 Quán Ăn",
+        lat: 16.4718, 
+        lng: 107.6015,
+        desc: "64 Kiệt 7 Ưng Bình, Cồn Hến"
+      }
+    ];
+
+    places.forEach(place => {
+      // make a market in map
+      const marker = L.marker([place.lat, place.lng]).addTo(map);
+      
+      // pop-up when click on mark
+      marker.bindPopup(`
+        <div style="font-family: 'Space Grotesk', sans-serif;">
+          <strong style="font-size: 14px;">${place.name}</strong><br/>
+          <span style="color: #666; font-size: 12px;">${place.type}</span><br/>
+          <span style="font-size: 12px;">📍 ${place.desc}</span>
+        </div>
+      `);
+    });
+  </script>
+
+</body>
+</html>
+
